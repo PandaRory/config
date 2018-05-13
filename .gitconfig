@@ -1,0 +1,13 @@
+[alias]
+    ci = commit
+    ca = commit --amend
+    co = checkout
+    ba = branch
+    su = status
+    rb = rebase
+    lgp = log --decorate --graph --pretty=oneline
+    lg = log --decorate --graph
+[color]
+    ui = auto
+[core]
+    editor = vim
