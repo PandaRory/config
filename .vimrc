@@ -20,7 +20,8 @@ Plugin 'garbas/vim-snipmate'
 Plugin 'MarcWeber/vim-addon-mw-utils'   " snipmate's dependencie
 Plugin 'tomtom/tlib_vim'                " snipmate's dependencie
 Plugin 'honza/vim-snippets'
-
+Plugin 'vim-airline/vim-airline'
+Plugin 'vim-airline/vim-airline-themes'
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
 filetype plugin indent on    " required
@@ -30,6 +31,7 @@ filetype plugin indent on    " required
 " :PluginInstall    - installs plugins; append `!` to update or just :PluginUpdate
 " :PluginSearch foo - searches for foo; append `!` to refresh local cache
 " :PluginClean      - confirms removal of unused plugins; append `!` to auto-approve removal
+"
 " see :h vundle for more details or wiki for FAQ
 
 syntax enable
@@ -44,8 +46,10 @@ set shiftwidth=4
 set autochdir
 set autoindent
 
-set statusline=%{fugitive#head(7)}\ %F\ %=%l/%L
-set laststatus=2
+let loaded_matchparen=1
+
+"set statusline=%{fugitive#head(7)}\ %F\ %=%l/%L
+"set laststatus=2
 
 set wildmenu    " Command-line completion
 
@@ -100,3 +104,4 @@ set diffopt+=vertical
 nnoremap <Leader>g :GitGutterSignsToggle<CR>
 set updatetime=500
 
+let g:airline_theme='simple'
