@@ -10,11 +10,12 @@ Plugin 'VundleVim/Vundle.vim'
 Plugin 'tpope/vim-fugitive'
 Plugin 'scrooloose/nerdtree'
 Plugin 'ctrlpvim/ctrlp.vim'
-Plugin 'sickill/vim-monokai'
-Plugin 'scrooloose/syntastic'
+Plugin 'kristijanhusak/vim-hybrid-material'
+Plugin 'neomake/neomake'
 Plugin 'tpope/vim-commentary'
+Plugin 'storyn26383/vim-vue'
 Plugin 'tpope/vim-surround'
-Plugin 'airblade/vim-gitgutter'
+Plugin 'mhinz/vim-signify'
 Plugin 'adelarsq/vim-matchit'
 Plugin 'garbas/vim-snipmate'
 Plugin 'MarcWeber/vim-addon-mw-utils'   " snipmate's dependencie
@@ -22,6 +23,7 @@ Plugin 'tomtom/tlib_vim'                " snipmate's dependencie
 Plugin 'honza/vim-snippets'
 Plugin 'vim-airline/vim-airline'
 Plugin 'vim-airline/vim-airline-themes'
+Plugin 'ap/vim-css-color'
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
 filetype plugin indent on    " required
@@ -35,23 +37,32 @@ filetype plugin indent on    " required
 " see :h vundle for more details or wiki for FAQ
 
 syntax enable
-colorscheme monokai
+colorscheme hybrid_material
+let g:enable_italic_font = 1
 set encoding=utf8
 set t_Co=256
-set number
 set cursorline
 set tabstop=4
 set expandtab
 set shiftwidth=4
 set autochdir
 set autoindent
-
+set pastetoggle=<Leader>p
+set number relativenumber " hybrid line numbers, set nu rnu
+set wildmenu " Command-line completion
+highlight CursorLineNr ctermfg=215
+highlight LineNr ctermfg=250
 let loaded_matchparen=1
 
-"set statusline=%{fugitive#head(7)}\ %F\ %=%l/%L
-"set laststatus=2
-
-set wildmenu    " Command-line completion
+" airline
+let g:airline#extensions#tabline#enabled = 1
+let g:airline#extensions#tabline#tab_nr_type = 1 " tab number
+let g:airline#extensions#tabline#show_tab_nr = 1
+let g:airline#extensions#tabline#show_splits = 0
+let g:airline#extensions#tabline#show_buffers = 0
+let g:airline#extensions#tabline#formatter = 'unique_tail'
+let g:airline_theme='simple'
+set noshowmode
 
 " Show extra space and tab
 set listchars=tab:▷⋅,trail:·
@@ -68,10 +79,12 @@ set smartcase
 set ignorecase
 set incsearch
 highlight Search ctermbg=Yellow
-highlight Search ctermfg=Red
+highlight Search ctermfg=Blue
 
 inoremap <C-d> <Del>
 nnoremap <Tab> <C-w>w
+nnoremap nu :set number relativenumber<CR>
+nnoremap nonu :set nonumber norelativenumber<CR>
 inoremap (<Enter> ()<Esc>i
 inoremap "<Enter> ""<Esc>i
 inoremap '<Enter> ''<Esc>i
@@ -80,28 +93,25 @@ inoremap {<Enter> {<Enter>}<Esc>ko
 
 " NERDTree
 map <C-n> :NERDTreeToggle<CR>
-autocmd VimEnter * NERDTree
-autocmd VimEnter * wincmd p
 autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
 let NERDTreeShowHidden=1
 
-" Syntastic
-set statusline+=%#warningmsg#
-set statusline+=%{SyntasticStatuslineFlag()}
-set statusline+=%*
-let g:syntastic_always_populate_loc_list = 1
-let g:syntastic_auto_loc_list = 1
-let g:syntastic_check_on_open = 1
-let g:syntastic_check_on_wq = 0
-
 " vim-commentary
-autocmd FileType php setlocal commentstring=#\ %s
+autocmd FileType php setlocal commentstring=//\ %s
 
 " vim-fugitive
 set diffopt+=vertical
 
-" vim-gitgutter, <Leader> default is \
-nnoremap <Leader>g :GitGutterSignsToggle<CR>
+" vim-signify, <Leader> default is \
+nmap <Leader>gt :SignifyToggle<CR>
 set updatetime=500
 
-let g:airline_theme='simple'
+" ctrlp
+let g:ctrlp_custom_ignore = {
+  \ 'dir':  '\.git$\|vendor$',
+  \ 'file': ''
+  \ }
+
+" neomake
+call neomake#configure#automake('w')
+let g:neomake_open_list = 2
