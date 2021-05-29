@@ -1,12 +1,19 @@
+[user]
+    email = m88506@gmail.com
+    name = PandaRory
 [alias]
-    ci = commit
+    cm = commit
     ca = commit --amend
     co = checkout
     ba = branch
     su = status
     rb = rebase
-    lgp = log --decorate --graph --pretty=oneline
+    re = reset
+    df = diff
+    dfn = diff --name-only
     lg = log --decorate --graph
+    lga = log --decorate --graph --pretty=format:'%C(auto)%H -%C(auto)%d %s %Cgreen(%ci) %C(bold blue)<%an>%Creset'
+    lgo = log --decorate --graph --pretty=oneline
 [color]
     ui = auto
 [core]
