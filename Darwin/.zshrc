@@ -76,6 +76,8 @@ source $ZSH/oh-my-zsh.sh
 
 # User configuration
 
+export PATH=/opt/homebrew/bin:$PATH
+
 PROMPT=$'
 %{$fg[green]%}%n@%m %{$fg[blue]%}%D{[%H:%M:%S]} %{$reset_color%}%{$fg[yellow]%}[%~]%{$reset_color%} $(git_prompt_info)\
 %{$fg[blue]%}->%{$fg[blue]%} $%{$reset_color%} '
